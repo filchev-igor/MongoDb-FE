@@ -1,0 +1,12 @@
+.navbar {
+    background-color: white;
+    background-image: radial-gradient(midnightblue 9px, transparent 10px),
+    repeating-radial-gradient(midnightblue 0, midnightblue 4px, transparent 5px, transparent 20px, midnightblue 21px, midnightblue 25px, transparent 26px, transparent 50px);
+    background-size: 30px 30px, 90px 90px;
+    background-position: 0 0;
+}
+
+.navbar .button {
+    background-color: gray;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
+}
