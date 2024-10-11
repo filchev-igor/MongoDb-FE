@@ -1,16 +1,16 @@
 import { useOutletContext } from "react-router-dom";
-import { Dispatch, SetStateAction } from "react";
+import { ConferenceType } from "../types/conferenceType.ts";
 
 type OutletContextType = {
-  userConferences: number[];
-  setUserConferences: Dispatch<SetStateAction<number[]>>;
+  userConferences: ConferenceType[];
+  handleUserConferencesChange: (newConference: ConferenceType) => void;
 };
 
 const useUserConferencesContext = () => {
-  const { userConferences, setUserConferences } =
+  const { userConferences, handleUserConferencesChange } =
     useOutletContext<OutletContextType>();
 
-  return { userConferences, setUserConferences };
+  return { userConferences, handleUserConferencesChange };
 };
 
 export default useUserConferencesContext;

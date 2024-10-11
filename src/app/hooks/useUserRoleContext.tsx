@@ -1,5 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
+import { USER_ROLES } from "../constants/users.ts";
 
 type OutletContextType = {
   userRole: string;
@@ -9,7 +10,10 @@ type OutletContextType = {
 const useUserRoleContext = () => {
   const { userRole, setUserRole } = useOutletContext<OutletContextType>();
 
-  return { userRole, setUserRole };
+  const hasUserRole = userRole === USER_ROLES.USER;
+  const hasAdminRole = userRole === USER_ROLES.ADMIN;
+
+  return { userRole, setUserRole, hasUserRole, hasAdminRole };
 };
 
 export default useUserRoleContext;

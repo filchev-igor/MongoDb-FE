@@ -1,21 +1,20 @@
-import useUserRoleContext from "../../hooks/useUserRoleContext.tsx";
-import { conferences } from "../../api/constants.ts";
 import ConferenceBlock from "./ConferenceBlock.tsx";
 import { useState } from "react";
 import { ConferenceType } from "../../types/conferenceType.ts";
 import { isEmpty } from "lodash";
-import useUserConferencesContext from "../../hooks/useUserConferencesContext.tsx";
+import ConferenceRegistrationButton from "./ConferenceRegistrationButton.tsx";
+import ConferenceParticipants from "./ConferenceParticipants.tsx";
+import CreateConferenceButton from "./CreateConferenceButton.tsx";
+import UserConferencesList from "./UserConferencesList.tsx";
+import ConferencesList from "./ConferencesList.tsx";
 
 const ConferencesPage = () => {
-  const { userRole } = useUserRoleContext();
-  const { userConferences, setUserConferences } = useUserConferencesContext();
-
   const [conferenceData, setConferenceData] = useState<ConferenceType | null>(
     null,
   );
 
   const handleConferenceDataChange = (conference: ConferenceType) => {
-    if (!isEmpty(conferenceData)) {
+    if (!isEmpty(conferenceData) && conference.id === conferenceData.id) {
       setConferenceData(null);
 
       return;
@@ -25,27 +24,26 @@ const ConferencesPage = () => {
   };
 
   return (
-    <>
-      {conferences.map((conference) => (
-        <div key={conference.id}>
-          <strong>Conference Title:</strong>
-          <span> {conference.title}</span>
+    <div className={"mt-20 mr-10 ml-28 grid sm:grid-cols-2 gap-5"}>
+      <CreateConferenceButton />
 
-          <button
-            type={"button"}
-            onClick={() => handleConferenceDataChange(conference)}
-          >
-            {conferenceData?.id !== conference.id
-              ? "Read more"
-              : "Hide conference info"}
-          </button>
-        </div>
-      ))}
+      <UserConferencesList />
+
+      <ConferencesList
+        conferenceData={conferenceData}
+        onClick={handleConferenceDataChange}
+      />
 
       {!isEmpty(conferenceData) && (
-        <ConferenceBlock conference={conferenceData} />
+        <ConferenceBlock conference={conferenceData}>
+          <>
+            <ConferenceRegistrationButton conference={conferenceData} />
+
+            <ConferenceParticipants conferenceId={conferenceData.id} />
+          </>
+        </ConferenceBlock>
       )}
-    </>
+    </div>
   );
 };
 

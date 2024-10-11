@@ -3,16 +3,12 @@ import { useState } from "react";
 import useUserRoleContext from "../../hooks/useUserRoleContext.tsx";
 
 const HomePage = () => {
-  const { setUserRole } = useUserRoleContext();
+  const { userRole, setUserRole } = useUserRoleContext();
 
   const [isOpen, setIsOpen] = useState(true);
 
   const handleUserRoleButtonsOpen = () => {
-    if (isOpen) {
-      return;
-    }
-
-    setIsOpen(true);
+    setIsOpen(!isOpen);
   };
 
   const handleUserRoleChange = (newUserRole: string) => {
@@ -22,10 +18,23 @@ const HomePage = () => {
   };
 
   return (
-    <div className={"grid grid-cols-2 gap-3 place-items-center"}>
-      <div className={"col-span-2"}>
-        <button type={"button"} onClick={handleUserRoleButtonsOpen}>
-          Choose user role
+    <div
+      className={
+        "grid grid-cols-1 sm:grid-cols-2 gap-5 place-items-center mt-20 mr-10 ml-28"
+      }
+    >
+      <div>
+        <strong>User role: </strong>
+        <span>{userRole}</span>
+      </div>
+
+      <div className={"w-full sm:w-fit"}>
+        <button
+          type={"button"}
+          onClick={handleUserRoleButtonsOpen}
+          className={"bg-sky-500 w-full sm:w-fit"}
+        >
+          Change user role
         </button>
       </div>
 
