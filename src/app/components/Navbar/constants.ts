@@ -5,7 +5,7 @@ export const NAVBAR_PAGES = [
   {
     isHidden: false,
     role: [USER_ROLES.ADMIN, USER_ROLES.USER, USER_ROLES.EMPLOYEE],
-    name: "Home",
+    name: "Homed",
     to: PATH_NAMES.homePage,
   },
   {
