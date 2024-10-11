@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "master" ] # or your main branch name
+    branches: [ "master" ]  # or your main branch
   pull_request:
     branches: [ "master" ]
   workflow_dispatch:
@@ -19,15 +19,19 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Specify your Node.js version
+          node-version: 18 # Adjust the Node.js version if necessary
 
-      # Install dependencies
+      # Install pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Install dependencies using pnpm
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
-      # Build the project
+      # Build the project using pnpm
       - name: Build the project
-        run: npm run build
+        run: pnpm run build
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
