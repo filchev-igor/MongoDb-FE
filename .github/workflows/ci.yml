@@ -27,7 +27,7 @@ jobs:
 
       # Install dependencies using pnpm
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm i
 
       # Build the project using pnpm
       - name: Build the project
@@ -39,3 +39,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: gh-pages
