@@ -1,5 +1,5 @@
-import useUserRoleContext from "../../hooks/useUserRoleContext.tsx";
-import useUserConferencesContext from "../../hooks/useUserConferencesContext.tsx";
+import useUserRoleContext from "../../hooks/useUserRoleContext.ts";
+import useUserConferencesContext from "../../hooks/useUserConferencesContext.ts";
 
 const ConferenceParticipants = ({ conferenceId }: { conferenceId: number }) => {
   const { hasUserRole } = useUserRoleContext();

@@ -1,6 +1,6 @@
 import UserRolesButtons from "./UserRolesButtons.tsx";
 import { useState } from "react";
-import useUserRoleContext from "../../hooks/useUserRoleContext.tsx";
+import useUserRoleContext from "../../hooks/useUserRoleContext.ts";
 
 const HomePage = () => {
   const { userRole, setUserRole } = useUserRoleContext();
@@ -18,11 +18,7 @@ const HomePage = () => {
   };
 
   return (
-    <div
-      className={
-        "grid grid-cols-1 sm:grid-cols-2 gap-5 place-items-center mt-20 mr-10 ml-28"
-      }
-    >
+    <div className={"grid grid-cols-1 sm:grid-cols-2 gap-5 place-items-center"}>
       <div>
         <strong>User role: </strong>
         <span>{userRole}</span>

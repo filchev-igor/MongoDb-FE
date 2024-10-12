@@ -1,5 +1,5 @@
-import useUserConferencesContext from "../../hooks/useUserConferencesContext.tsx";
-import useUserRoleContext from "../../hooks/useUserRoleContext.tsx";
+import useUserConferencesContext from "../../hooks/useUserConferencesContext.ts";
+import useUserRoleContext from "../../hooks/useUserRoleContext.ts";
 
 const UserConferencesList = () => {
   const { hasUserRole } = useUserRoleContext();

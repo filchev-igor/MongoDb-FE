@@ -1,7 +1,7 @@
-import useConferencesListContext from "../../hooks/useConferencesListContext.tsx";
+import useConferencesListContext from "../../hooks/useConferencesListContext.ts";
 import { ConferenceType } from "../../types/conferenceType.ts";
 import { isEmpty } from "lodash";
-import useUserRoleContext from "../../hooks/useUserRoleContext.tsx";
+import useUserRoleContext from "../../hooks/useUserRoleContext.ts";
 
 const ConferencesList = ({
   conferenceData,

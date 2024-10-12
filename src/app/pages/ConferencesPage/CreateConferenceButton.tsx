@@ -1,6 +1,6 @@
-import useUserRoleContext from "../../hooks/useUserRoleContext.tsx";
+import useUserRoleContext from "../../hooks/useUserRoleContext.ts";
 import { generateRandomConference } from "../../utils/conference.ts";
-import useConferencesListContext from "../../hooks/useConferencesListContext.tsx";
+import useConferencesListContext from "../../hooks/useConferencesListContext.ts";
 import { useState } from "react";
 import LoadingSpinner from "../../components/spinners/LoadingSpinner.tsx";
 

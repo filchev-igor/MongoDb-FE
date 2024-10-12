@@ -1,7 +1,7 @@
 import { ConferenceType } from "../../types/conferenceType.ts";
 import { ReactElement, useCallback, useEffect, useState } from "react";
-import useUserRoleContext from "../../hooks/useUserRoleContext.tsx";
-import useUserConferencesContext from "../../hooks/useUserConferencesContext.tsx";
+import useUserRoleContext from "../../hooks/useUserRoleContext.ts";
+import useUserConferencesContext from "../../hooks/useUserConferencesContext.ts";
 import ConferenceBlockPlaceholder from "./ConferenceBlockPlaceholder.tsx";
 
 const ConferenceBlock = ({

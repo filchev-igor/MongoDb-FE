@@ -5,7 +5,11 @@ const Navbar = ({ userRole }: { userRole: string }) => {
   const { pathname } = useLocation();
 
   return (
-    <nav className={"navbar"}>
+    <nav
+      className={
+        "sticky top-0 bg-slate-50/90 dark:bg-slate-700/90 backdrop-blur-sm ring-1 ring-slate-900/10 dark:ring-black/10"
+      }
+    >
       <div className={"flex justify-end gap-3 mr-10"}>
         {NAVBAR_PAGES.map(({ name, to, role, isHidden }) => {
           const isHighlighted = pathname === to;

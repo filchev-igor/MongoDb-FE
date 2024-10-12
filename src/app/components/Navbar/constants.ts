@@ -15,9 +15,15 @@ export const NAVBAR_PAGES = [
     to: PATH_NAMES.conferencesPage,
   },
   {
-    isHidden: true,
+    isHidden: false,
     role: [USER_ROLES.ADMIN],
     name: "Users",
     to: PATH_NAMES.usersListPage,
+  },
+  {
+    isHidden: false,
+    role: [USER_ROLES.ADMIN, USER_ROLES.USER, USER_ROLES.EMPLOYEE],
+    name: "Settings",
+    to: PATH_NAMES.settingsPage,
   },
 ];

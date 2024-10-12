@@ -24,7 +24,7 @@ const ConferencesPage = () => {
   };
 
   return (
-    <div className={"mt-20 mr-10 ml-28 grid sm:grid-cols-2 gap-5"}>
+    <div className={"grid sm:grid-cols-2 gap-5"}>
       <CreateConferenceButton />
 
       <UserConferencesList />
