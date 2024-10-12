@@ -1,12 +1,13 @@
 import useBackgroundClassNameContext from "../../hooks/useBackgroundClassNameContext.ts";
 import { BACKGROUND_CLASS_NAMES } from "../../constants/siteStyles.ts";
 import { capitalizeFirstLetter, getDashedText } from "../../utils/text.ts";
+import "./styles.css";
 
 const SettingsPage = () => {
   const { setBackgroundClassName } = useBackgroundClassNameContext();
 
   return (
-    <div className={"grid grid-cols-1 sm:grid-cols-2 gap-5"}>
+    <div className={"grid-block grid-block-1 sm:grid-block-2"}>
       <div className={"sm:col-span-2"}>
         <h1 className={"font-light text-center"}>Background style</h1>
       </div>
