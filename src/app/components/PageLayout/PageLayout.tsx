@@ -1,6 +1,6 @@
 import Navbar from "../Navbar/Navbar.tsx";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { USER_ROLES } from "../../constants/users.ts";
 import { ConferenceType } from "../../types/conferenceType.ts";
 import { Toaster } from "react-hot-toast";
@@ -31,15 +31,23 @@ const PageLayout = () => {
     setConferencesList([...conferencesList, newConference]);
   };
 
+  useEffect(() => {
+    const bodyTag = document.querySelector("body");
+
+    if (!bodyTag) {
+      return;
+    }
+
+    bodyTag.classList.toggle(backgroundClassName);
+  }, [backgroundClassName]);
+
   return (
-    <div className={"min-h-screen flex flex-col"}>
+    <>
       <Navbar userRole={userRole} />
 
       <Toaster position="bottom-left" reverseOrder={false} />
 
-      <main
-        className={`pt-10 pr-10 pl-28 pb-10 flex-grow ${backgroundClassName} `}
-      >
+      <main className={`pt-10 pr-10 pl-28 pb-5 ${backgroundClassName}`}>
         <Outlet
           context={{
             userRole,
@@ -53,7 +61,7 @@ const PageLayout = () => {
           }}
         />
       </main>
-    </div>
+    </>
   );
 };
 
