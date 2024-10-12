@@ -47,7 +47,7 @@ const PageLayout = () => {
 
       <Toaster position="bottom-left" reverseOrder={false} />
 
-      <main className={`pt-10 pr-10 pl-28 pb-5 ${backgroundClassName}`}>
+      <main className={`pt-10 pr-10 pl-28 pb-5`}>
         <Outlet
           context={{
             userRole,
