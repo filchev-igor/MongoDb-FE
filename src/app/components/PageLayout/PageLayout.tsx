@@ -38,6 +38,12 @@ const PageLayout = () => {
       return;
     }
 
+    const { 0: bodyClassName } = bodyTag.classList;
+
+    if (bodyClassName === backgroundClassName) {
+      return;
+    }
+
     bodyTag.classList.toggle(backgroundClassName);
   }, [backgroundClassName]);
 
