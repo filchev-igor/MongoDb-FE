@@ -18,7 +18,7 @@ export const NAVBAR_PAGES = [
     isHidden: false,
     role: [USER_ROLES.ADMIN],
     name: "Users",
-    to: PATH_NAMES.usersListPage,
+    to: PATH_NAMES.usersPage,
   },
   {
     isHidden: false,

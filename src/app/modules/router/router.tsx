@@ -22,7 +22,7 @@ export const router = createBrowserRouter(
           element: <ConferencesPage />,
         },
         {
-          path: PATH_NAMES.usersListPage,
+          path: PATH_NAMES.usersPage,
           element: <UsersListPage />,
         },
         {

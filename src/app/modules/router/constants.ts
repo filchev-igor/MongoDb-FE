@@ -1,6 +1,6 @@
 export const PATH_NAMES = {
   homePage: "/",
   conferencesPage: "/conferences",
-  usersListPage: "/users-list",
+  usersPage: "/users",
   settingsPage: "/settings",
 };
