@@ -21,7 +21,7 @@ const Navbar = ({ userRole = "" }: { userRole?: string }) => {
             return null;
           }
 
-          if (!isPublic) {
+          if (!isPublic && !isAuthenticated) {
             return null;
           }
 
