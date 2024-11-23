@@ -48,7 +48,7 @@ export const useConferenceParticipantsUpdate = () => {
 
   const { mutate, isLoading } = useMutation(
     ({ conferenceId }: { conferenceId: number; onSuccess: () => void }) =>
-      updateConferenceParticipants(conferenceId, userData.id),
+      updateConferenceParticipants(conferenceId, userData?.id ?? 0),
     {
       onSuccess: async (_data, { onSuccess }) => {
         await queryClient.invalidateQueries([CONFERENCES_LIST_QUERY_KEY]);

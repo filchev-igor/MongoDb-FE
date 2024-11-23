@@ -3,7 +3,7 @@ import { USER_ROLES } from "../constants/users.ts";
 import { UserType } from "../types/userType.ts";
 
 type OutletContextType = {
-  userData: UserType;
+  userData: UserType | undefined;
   isUserDataLoading: boolean;
 };
 

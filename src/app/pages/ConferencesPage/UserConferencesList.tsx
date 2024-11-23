@@ -3,7 +3,7 @@ import useUserContext from "../../hooks/useUserContext.ts";
 const UserConferencesList = () => {
   const { hasUserRole, userData } = useUserContext();
 
-  if (hasUserRole || !userData.conferences?.length) {
+  if (hasUserRole || !userData?.conferences?.length) {
     return null;
   }
 

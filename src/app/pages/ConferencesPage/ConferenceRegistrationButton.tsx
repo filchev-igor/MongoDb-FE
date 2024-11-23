@@ -15,7 +15,7 @@ const ConferenceRegistrationButton = ({
     isConferenceParticipantsUpdating,
   } = useConferenceParticipantsUpdate();
 
-  const isUserRegistered = userData.conferences?.some(
+  const isUserRegistered = userData?.conferences?.some(
     ({ id }) => id === conferenceId,
   );
 

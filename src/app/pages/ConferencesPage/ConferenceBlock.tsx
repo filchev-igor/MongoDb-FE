@@ -14,7 +14,7 @@ const ConferenceBlock = ({
   const { userData } = useUserContext();
 
   const isUserRegistered = useMemo(() => {
-    return userData.conferences?.some(({ id }) => id === conference.id);
+    return userData?.conferences?.some(({ id }) => id === conference.id);
   }, [conference, userData]);
 
   return (

@@ -55,7 +55,7 @@ export const useUserUpdate = () => {
     }: {
       backgroundClassName: string;
       onSuccess: () => void;
-    }) => updateUser(userData.id, backgroundClassName),
+    }) => updateUser(userData?.id ?? 0, backgroundClassName),
     {
       onSuccess: async (_data, { onSuccess }) => {
         await queryClient.invalidateQueries([USER_QUERY_KEY]);

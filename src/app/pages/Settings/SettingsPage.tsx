@@ -14,7 +14,7 @@ const SettingsPage = () => {
       return;
     }
 
-    if (newBackgroundClassName === userData.backgroundClassName) {
+    if (newBackgroundClassName === userData?.backgroundClassName) {
       return;
     }
 
