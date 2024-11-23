@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { PATH_NAMES } from "../modules/router/constants.ts";
 
 const useAuth = () => {
+  const navigate = useNavigate();
+
   const initialUserId = localStorage.getItem("user_id");
 
   // State to manage the authentication token
@@ -31,6 +35,8 @@ const useAuth = () => {
     setUserId(null);
 
     window.dispatchEvent(new CustomEvent("authTokenUpdate"));
+
+    navigate(PATH_NAMES.homePage);
   };
 
   // Listen for changes to localStorage across tabs
