@@ -1,7 +1,8 @@
-import useConferencesListContext from "../../hooks/useConferencesListContext.ts";
 import { ConferenceType } from "../../types/conferenceType.ts";
 import { isEmpty } from "lodash";
-import useUserRoleContext from "../../hooks/useUserRoleContext.ts";
+import { useConferencesList } from "../../api/conferences/queryHooks.ts";
+import LoadingSpinner from "../../components/spinners/LoadingSpinner.tsx";
+import useUserContext from "../../hooks/useUserContext.ts";
 
 const ConferencesList = ({
   conferenceData,
@@ -10,10 +11,15 @@ const ConferencesList = ({
   conferenceData: ConferenceType | null;
   onClick: (conference: ConferenceType) => void;
 }) => {
-  const { conferencesList } = useConferencesListContext();
-  const { hasAdminRole } = useUserRoleContext();
+  const { hasAdminRole } = useUserContext();
+  const { conferencesListData, isConferencesListDataLoading } =
+    useConferencesList();
 
-  if (isEmpty(conferencesList)) {
+  if (isConferencesListDataLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (isEmpty(conferencesListData)) {
     return (
       <span>
         {hasAdminRole ? "You" : "Administrator"} did not add any conference yet
@@ -21,11 +27,11 @@ const ConferencesList = ({
     );
   }
 
-  return conferencesList.map((conference) => (
+  return conferencesListData!.map((conference) => (
     <div key={conference.id} className={"grid gap-1"}>
       <div>
-        <strong>Conference Title:</strong>
-        <span> {conference.title}</span>
+        <strong>Conference name:</strong>
+        <span> {conference.name}</span>
       </div>
 
       <div className={"w-full sm:w-fit"}>

@@ -1,33 +1,21 @@
-import useUserRoleContext from "../../hooks/useUserRoleContext.ts";
 import { generateRandomConference } from "../../utils/conference.ts";
-import useConferencesListContext from "../../hooks/useConferencesListContext.ts";
-import { useState } from "react";
 import LoadingSpinner from "../../components/spinners/LoadingSpinner.tsx";
+import { useConferenceCreate } from "../../api/conferences/queryHooks.ts";
+import useUserContext from "../../hooks/useUserContext.ts";
 
 const CreateConferenceButton = () => {
-  const { hasAdminRole } = useUserRoleContext();
-  const { conferencesList, handleConferenceListUpdate } =
-    useConferencesListContext();
+  const { hasAdminRole } = useUserContext();
+  const { mutateConferenceCreate, isConferenceCreating } =
+    useConferenceCreate();
 
-  const [isCreating, setIsCreating] = useState(false);
-
-  const handleConferenceAdd = () => {
-    if (isCreating) {
+  const handleConferenceCreate = () => {
+    if (isConferenceCreating) {
       return;
     }
 
-    setIsCreating(true);
+    const data = generateRandomConference();
 
-    const lastConferenceId =
-      conferencesList[conferencesList.length - 1]?.id ?? 0;
-
-    const newConferenceData = generateRandomConference(lastConferenceId);
-
-    setTimeout(() => {
-      handleConferenceListUpdate(newConferenceData);
-
-      setIsCreating(false);
-    }, 1_000);
+    mutateConferenceCreate({ data, onSuccess: () => {} });
   };
 
   if (!hasAdminRole) {
@@ -38,14 +26,14 @@ const CreateConferenceButton = () => {
     <div className={"sm:col-span-2 text-center w-full sm:w-fit"}>
       <button
         type={"button"}
-        className={`flex from-cyan-500 to-blue-500 bg-gradient-to-b w-full sm:w-fit ${isCreating ? "disabled" : ""}`}
-        onClick={handleConferenceAdd}
+        className={`flex from-cyan-500 to-blue-500 bg-gradient-to-b w-full sm:w-fit ${isConferenceCreating ? "disabled" : ""}`}
+        onClick={handleConferenceCreate}
       >
-        {isCreating ? (
-          <>
+        {isConferenceCreating ? (
+          <div className={"flex"}>
             <LoadingSpinner />
-            Processing...
-          </>
+            Processing
+          </div>
         ) : (
           "Create new conference"
         )}

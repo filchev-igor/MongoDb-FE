@@ -1,8 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { NAVBAR_PAGES } from "./constants.ts";
+import useAuth from "../../hooks/useAuth.ts";
 
-const Navbar = ({ userRole }: { userRole: string }) => {
+const Navbar = ({ userRole = "" }: { userRole?: string }) => {
   const { pathname } = useLocation();
+
+  const { isAuthenticated, logout } = useAuth();
 
   return (
     <nav
@@ -18,7 +21,7 @@ const Navbar = ({ userRole }: { userRole: string }) => {
             return null;
           }
 
-          if (!role.includes(userRole)) {
+          if (!!role?.length && !role.includes(userRole)) {
             return null;
           }
 
@@ -32,6 +35,16 @@ const Navbar = ({ userRole }: { userRole: string }) => {
             </Link>
           );
         })}
+
+        {isAuthenticated && (
+          <button
+            type={"button"}
+            onClick={logout}
+            className={"bg-red-600 my-2"}
+          >
+            Log out
+          </button>
+        )}
       </div>
     </nav>
   );

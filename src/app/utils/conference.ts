@@ -1,21 +1,20 @@
 import { ConferenceType } from "../types/conferenceType.ts";
 import { faker } from "@faker-js/faker/locale/ar";
 
-const generateRandomTime = (): string => {
-  const hours = faker.number.int({ min: 1, max: 12 });
+const generateRandomTime = () => {
+  const hours = faker.number
+    .int({ min: 0, max: 23 })
+    .toString()
+    .padStart(2, "0");
   const minutes = faker.number
     .int({ min: 0, max: 59 })
     .toString()
     .padStart(2, "0");
-  const period = faker.helpers.arrayElement(["AM", "PM"]);
-  return `${hours}:${minutes} ${period}`;
+  return `${hours}:${minutes}`;
 };
 
-export const generateRandomConference = (
-  previousId: number,
-): ConferenceType => {
-  const conferenceTitle = faker.company.catchPhrase();
-  const conferenceDate = faker.date.future().toDateString();
+export const generateRandomConference = (): ConferenceType => {
+  const { 0: conferenceDate } = faker.date.future().toISOString().split("T");
 
   const randomAgenda = Array.from({ length: 5 }).map(() => ({
     time: generateRandomTime(),
@@ -23,8 +22,7 @@ export const generateRandomConference = (
   }));
 
   return {
-    id: previousId + 1,
-    title: conferenceTitle,
+    name: faker.company.catchPhrase(),
     date: conferenceDate,
     time: `${generateRandomTime()} - ${generateRandomTime()}`,
     location: {
@@ -39,9 +37,5 @@ export const generateRandomConference = (
       company: faker.company.name(),
     })),
     agendas: randomAgenda,
-    registration: {
-      info: "Please register in advance to secure your spot. Limited seats are available.",
-      action: "Click the 'Register' button below.",
-    },
   };
 };

@@ -1,6 +1,8 @@
+import { UserType } from "./userType.ts";
+
 export type ConferenceType = {
-  id: number;
-  title: string;
+  id?: number;
+  name: string;
   date: string;
   time: string;
   location: {
@@ -18,8 +20,5 @@ export type ConferenceType = {
     time: string;
     event: string;
   }[];
-  registration: {
-    info: string;
-    action: string;
-  };
+  participants: UserType[];
 };
