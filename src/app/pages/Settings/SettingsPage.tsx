@@ -42,7 +42,7 @@ const SettingsPage = () => {
                 handleBackgroundClassNameChange(newBackgroundClassName)
               }
               className={
-                "border border-purple-600 text-purple-600 rounded-none hover:bg-purple-600 hover:text-white w-48"
+                "border border-purple-600 text-purple-600 rounded-none hover:bg-purple-600 hover:text-white w-48 bg-white"
               }
             >
               {capitalizedClassName}
