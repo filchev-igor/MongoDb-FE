@@ -15,7 +15,7 @@ const HomePage = () => {
         <HomePageLayout>
           <LoginBlock>
             <strong
-              className={"content-center cursor-pointer text-black"}
+              className={"content-center cursor-pointer"}
               onClick={() => setIsLogging(false)}
             >
               Register
@@ -29,7 +29,7 @@ const HomePage = () => {
       <HomePageLayout>
         <RegistrationBlock>
           <strong
-            className={"content-center cursor-pointer text-black"}
+            className={"content-center cursor-pointer"}
             onClick={() => setIsLogging(true)}
           >
             Login
