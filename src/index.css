@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    @apply text-black leading-tight;
+  * {
+    @apply text-black;
   }
 }
 
