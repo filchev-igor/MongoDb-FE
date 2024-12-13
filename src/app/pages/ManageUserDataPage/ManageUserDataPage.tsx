@@ -8,7 +8,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserType } from "../../types/userType.ts";
 import { isEmpty } from "lodash";
-import { date, number, object, string } from "yup";
 import { USER_SCHEMA } from "./constants.ts";
 import { PATH_NAMES } from "../../modules/router/constants.ts";
 
@@ -24,28 +23,54 @@ const ManageUserDataPage = () => {
   const [name, setName] = useState(state?.name ?? "");
   const [birthDate, setBirthDate] = useState(state?.birthDate ?? "");
   const [email, setEmail] = useState(state?.email ?? "");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const isActionButtonDisabled =
     !username.length ||
     !name.length ||
     !age ||
     !email.length ||
-    !birthDate.length ||
-    !name.length;
+    !birthDate.length;
 
   const handleAgeChange = (newAgeAsText: string) => {
     const newAge = !!newAgeAsText ? Number(newAgeAsText) : 0;
-
     setAge(newAge);
+  };
+
+  const areUserDataValid = async () => {
+    try {
+      await USER_SCHEMA.validate(
+        { username, name, age, email, birthDate },
+        { abortEarly: false }, // Gather all validation errors
+      );
+      setErrors({}); // Clear errors if validation passes
+
+      return true;
+    } catch (validationError) {
+      if (validationError.inner) {
+        const validationErrors: Record<string, string> = {};
+
+        validationError.inner.forEach((err: any) => {
+          if (err.path) {
+            validationErrors[err.path] = err.message;
+          }
+        });
+
+        setErrors(validationErrors); // Set validation errors
+      }
+
+      return false;
+    }
   };
 
   const handleUserDataChange = async () => {
     try {
-      if (isUserCreating || isUserUpdating) {
-        return;
-      }
+      if (isUserCreating || isUserUpdating || isActionButtonDisabled) return;
 
-      if (isActionButtonDisabled) {
+      const isValid = await areUserDataValid();
+
+      if (!isValid) {
+        toast.error("Please fix validation errors before proceeding.");
         return;
       }
 
@@ -53,14 +78,11 @@ const ManageUserDataPage = () => {
         await mutateUserCreate({
           data: { age, name, username, email, birthDate },
           onSuccess: () => {
-            /*
             setName("");
             setAge(0);
             setUsername("");
             setEmail("");
             setBirthDate("");
-
-             */
 
             toast.success(`User created successfully!`);
           },
@@ -73,13 +95,10 @@ const ManageUserDataPage = () => {
         data: { age, name, username, email, birthDate, id: state.id },
         onSuccess: () => {
           navigate(PATH_NAMES.usersPage);
-
           toast.success(`User data changed successfully!`);
         },
       });
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error: unknown) {
+    } catch (error) {
       toast.error("An error occurred. Please try again.");
     }
   };
@@ -97,6 +116,7 @@ const ManageUserDataPage = () => {
           placeholder={"Username"}
           value={username}
           onChange={setUsername}
+          error={errors.username}
         />
 
         <InputLabel
@@ -104,6 +124,7 @@ const ManageUserDataPage = () => {
           placeholder={"Name"}
           value={name}
           onChange={setName}
+          error={errors.name}
         />
 
         <InputLabel
@@ -111,6 +132,7 @@ const ManageUserDataPage = () => {
           placeholder={"Age"}
           value={age ?? 0}
           onChange={handleAgeChange}
+          error={errors.age}
         />
 
         <InputLabel
@@ -118,6 +140,7 @@ const ManageUserDataPage = () => {
           placeholder={"user@example.com"}
           value={email}
           onChange={setEmail}
+          error={errors.email}
         />
 
         <InputLabel
@@ -125,7 +148,9 @@ const ManageUserDataPage = () => {
           placeholder={"Date of birth"}
           value={birthDate}
           onChange={setBirthDate}
+          error={errors.birthDate}
         />
+
         <Button
           variant="info"
           onClick={handleUserDataChange}
