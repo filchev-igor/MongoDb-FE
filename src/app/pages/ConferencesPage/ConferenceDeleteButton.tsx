@@ -8,14 +8,8 @@ const ConferenceDeleteButton = ({
   onClick: () => void;
   isDeleting: boolean;
 }) => {
-  const { hasAdminRole } = useUserContext();
-
-  if (!hasAdminRole) {
-    return null;
-  }
-
   return (
-    <div>
+    <div className={"mb-3"}>
       <button
         type={"button"}
         onClick={onClick}

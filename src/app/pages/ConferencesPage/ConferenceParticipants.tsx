@@ -5,6 +5,8 @@ const ConferenceParticipants = ({
 }: {
   conference: ConferenceType;
 }) => {
+  return null;
+
   if (!conference.participants.length) {
     return null;
   }

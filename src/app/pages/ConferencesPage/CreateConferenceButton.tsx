@@ -1,10 +1,8 @@
 import { generateRandomConference } from "../../utils/conference.ts";
 import LoadingSpinner from "../../components/spinners/LoadingSpinner.tsx";
 import { useConferenceCreate } from "../../api/conferences/queryHooks.ts";
-import useUserContext from "../../hooks/useUserContext.ts";
 
 const CreateConferenceButton = () => {
-  const { hasAdminRole } = useUserContext();
   const { mutateConferenceCreate, isConferenceCreating } =
     useConferenceCreate();
 
@@ -17,10 +15,6 @@ const CreateConferenceButton = () => {
 
     mutateConferenceCreate({ data, onSuccess: () => {} });
   };
-
-  if (!hasAdminRole) {
-    return null;
-  }
 
   return (
     <div className={"sm:col-span-2 text-center w-full sm:w-fit"}>

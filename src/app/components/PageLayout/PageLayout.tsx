@@ -19,7 +19,7 @@ const PageLayout = () => {
 
     const { 0: bodyClassName } = bodyTag.classList;
     const defaultBackgroundClassName = getDashedText(
-      BACKGROUND_CLASS_NAMES.LINED_PAPER,
+      BACKGROUND_CLASS_NAMES.GRADIENT_ANIMATION,
     );
 
     bodyTag.classList.remove(bodyClassName);
