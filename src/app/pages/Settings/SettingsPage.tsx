@@ -1,12 +1,11 @@
-import { BACKGROUND_CLASS_NAMES } from "../../constants/siteStyles.ts";
-import { capitalizeFirstLetter, getDashedText } from "../../utils/text.ts";
 import "./styles.css";
-import { useUserUpdate } from "../../api/users/queryHooks.ts";
-import UseUserContext from "../../hooks/useUserContext.ts";
 
 const SettingsPage = () => {
-  const { userData } = UseUserContext();
+  //const { userData } = UseUserContext();
 
+  return null;
+
+  /*
   const { mutateUserUpdate, isUserUpdating } = useUserUpdate();
 
   const handleBackgroundClassNameChange = (newBackgroundClassName: string) => {
@@ -24,6 +23,9 @@ const SettingsPage = () => {
     });
   };
 
+   */
+
+  /*
   return (
     <div className={"grid-block grid-block-1 sm:grid-block-2"}>
       <div className={"sm:col-span-2"}>
@@ -52,6 +54,8 @@ const SettingsPage = () => {
       })}
     </div>
   );
+  
+   */
 };
 
 export default SettingsPage;

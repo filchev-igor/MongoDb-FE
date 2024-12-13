@@ -10,6 +10,7 @@ import { UserType } from "../../types/userType.ts";
 import { isEmpty } from "lodash";
 import { USER_SCHEMA } from "./constants.ts";
 import { PATH_NAMES } from "../../modules/router/constants.ts";
+import { ValidationError } from "yup";
 
 const ManageUserDataPage = () => {
   const { state } = useLocation() as { state: UserType };
@@ -33,7 +34,8 @@ const ManageUserDataPage = () => {
     !birthDate.length;
 
   const handleAgeChange = (newAgeAsText: string) => {
-    const newAge = !!newAgeAsText ? Number(newAgeAsText) : 0;
+    const newAge = newAgeAsText?.length ? Number(newAgeAsText) : 0;
+
     setAge(newAge);
   };
 
@@ -46,11 +48,12 @@ const ManageUserDataPage = () => {
       setErrors({}); // Clear errors if validation passes
 
       return true;
-    } catch (validationError) {
-      if (validationError.inner) {
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        // Narrowing the error type
         const validationErrors: Record<string, string> = {};
 
-        validationError.inner.forEach((err: any) => {
+        error.inner.forEach((err) => {
           if (err.path) {
             validationErrors[err.path] = err.message;
           }
@@ -98,7 +101,8 @@ const ManageUserDataPage = () => {
           toast.success(`User data changed successfully!`);
         },
       });
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
       toast.error("An error occurred. Please try again.");
     }
   };

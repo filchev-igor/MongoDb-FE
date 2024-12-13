@@ -1,4 +1,3 @@
-import useUserContext from "../../hooks/useUserContext.ts";
 import toast from "react-hot-toast";
 import { useConferenceParticipantsUpdate } from "../../api/conferences/queryHooks.ts";
 import LoadingSpinner from "../../components/spinners/LoadingSpinner.tsx";
@@ -8,16 +7,12 @@ const ConferenceRegistrationButton = ({
 }: {
   conferenceId: number;
 }) => {
-  const { userData } = useUserContext();
-
   const {
     mutateConferenceParticipantsUpdate,
     isConferenceParticipantsUpdating,
   } = useConferenceParticipantsUpdate();
 
-  const isUserRegistered = userData?.conferences?.some(
-    ({ id }) => id === conferenceId,
-  );
+  const isUserRegistered = false;
 
   const handleRegistrationButtonClick = () => {
     mutateConferenceParticipantsUpdate({

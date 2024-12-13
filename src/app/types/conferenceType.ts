@@ -20,5 +20,5 @@ export type ConferenceType = {
     time: string;
     event: string;
   }[];
-  participants: UserType[];
+  participants?: UserType[];
 };

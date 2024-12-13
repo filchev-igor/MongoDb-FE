@@ -1,8 +1,6 @@
-import useUserContext from "../../hooks/useUserContext.ts";
-
 const UserConferencesList = () => {
-  const { hasUserRole, userData } = useUserContext();
-
+  return null;
+  /*
   if (hasUserRole || !userData?.conferences?.length) {
     return null;
   }
@@ -17,6 +15,8 @@ const UserConferencesList = () => {
       </ul>
     </div>
   );
+  
+     */
 };
 
 export default UserConferencesList;

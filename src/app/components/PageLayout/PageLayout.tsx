@@ -23,14 +23,12 @@ const PageLayout = () => {
     );
 
     bodyTag.classList.remove(bodyClassName);
-    bodyTag.classList.add(
-      userData?.backgroundClassName ?? defaultBackgroundClassName,
-    );
-  }, [userData?.backgroundClassName]);
+    bodyTag.classList.add(defaultBackgroundClassName);
+  }, []);
 
   return (
     <>
-      <Navbar userRole={userData?.role} />
+      <Navbar />
 
       <Toaster position="bottom-left" reverseOrder={false} />
 

@@ -1,6 +1,5 @@
 import { ConferenceType } from "../../types/conferenceType.ts";
-import { ReactElement, useMemo } from "react";
-import useUserContext from "../../hooks/useUserContext.ts";
+import { ReactElement } from "react";
 
 const ConferenceBlock = ({
   conference,
@@ -11,11 +10,7 @@ const ConferenceBlock = ({
   conferenceDeleteButton: ReactElement;
   children: ReactElement | null;
 }) => {
-  const { userData } = useUserContext();
-
-  const isUserRegistered = useMemo(() => {
-    return userData?.conferences?.some(({ id }) => id === conference.id);
-  }, [conference, userData]);
+  const isUserRegistered = false;
 
   return (
     <div className={"sm:col-span-2 mb-5"}>

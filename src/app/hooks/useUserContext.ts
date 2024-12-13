@@ -1,5 +1,4 @@
 import { useOutletContext } from "react-router-dom";
-import { USER_ROLES } from "../constants/users.ts";
 import { UserType } from "../types/userType.ts";
 
 type OutletContextType = {
@@ -11,8 +10,8 @@ const useUserContext = () => {
   const { userData, isUserDataLoading } = useOutletContext<OutletContextType>();
 
   //Maybe ? is not needed
-  const hasUserRole = userData?.role === USER_ROLES.USER;
-  const hasAdminRole = userData?.role === USER_ROLES.ADMIN;
+  const hasUserRole = false;
+  const hasAdminRole = false;
 
   return { userData, isUserDataLoading, hasUserRole, hasAdminRole };
 };
