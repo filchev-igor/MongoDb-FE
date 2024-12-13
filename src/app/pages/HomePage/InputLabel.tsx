@@ -7,6 +7,7 @@ const InputLabel = ({
   value,
   onChange,
   divClassName,
+  error,
 }: {
   label: string;
   placeholder: string;
@@ -14,6 +15,7 @@ const InputLabel = ({
   value: string | number;
   onChange: (newValue: string) => void;
   divClassName?: string;
+  error?: string;
 }) => {
   const id = useId();
 
@@ -35,6 +37,10 @@ const InputLabel = ({
         value={value}
         required
       />
+
+      {!!error?.length && (
+        <p className="mt-2 text-sm text-red-600 dark:text-red-500">{error}</p>
+      )}
     </div>
   );
 };

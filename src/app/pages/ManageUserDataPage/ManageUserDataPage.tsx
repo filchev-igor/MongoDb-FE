@@ -1,25 +1,29 @@
 import { useUserCreate, useUserUpdate } from "../../api/users/queryHooks.ts";
 import LoadingSpinner from "../../components/spinners/LoadingSpinner.tsx";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import InputLabel from "../HomePage/InputLabel.tsx";
-import { Breadcrumb, Button, Card } from "react-bootstrap";
+import { Breadcrumb, Button, Card, ListGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserType } from "../../types/userType.ts";
 import { isEmpty } from "lodash";
+import { date, number, object, string } from "yup";
+import { USER_SCHEMA } from "./constants.ts";
+import { PATH_NAMES } from "../../modules/router/constants.ts";
 
 const ManageUserDataPage = () => {
   const { state } = useLocation() as { state: UserType };
+  const navigate = useNavigate();
 
   const { isUserCreating, mutateUserCreate } = useUserCreate();
   const { isUserUpdating, mutateUserUpdate } = useUserUpdate();
 
-  const [username, setUsername] = useState(state.username ?? "");
-  const [age, setAge] = useState<number>(state.age ?? 0);
-  const [name, setName] = useState(state.name ?? "");
-  const [birthDate, setBirthDate] = useState(state.birthDate ?? "");
-  const [email, setEmail] = useState(state.email ?? "");
+  const [username, setUsername] = useState(state?.username ?? "");
+  const [age, setAge] = useState<number>(state?.age ?? 0);
+  const [name, setName] = useState(state?.name ?? "");
+  const [birthDate, setBirthDate] = useState(state?.birthDate ?? "");
+  const [email, setEmail] = useState(state?.email ?? "");
 
   const isActionButtonDisabled =
     !username.length ||
@@ -49,11 +53,14 @@ const ManageUserDataPage = () => {
         await mutateUserCreate({
           data: { age, name, username, email, birthDate },
           onSuccess: () => {
+            /*
             setName("");
             setAge(0);
             setUsername("");
             setEmail("");
             setBirthDate("");
+
+             */
 
             toast.success(`User created successfully!`);
           },
@@ -65,11 +72,7 @@ const ManageUserDataPage = () => {
       mutateUserUpdate({
         data: { age, name, username, email, birthDate, id: state.id },
         onSuccess: () => {
-          setName("");
-          setAge(0);
-          setUsername("");
-          setEmail("");
-          setBirthDate("");
+          navigate(PATH_NAMES.usersPage);
 
           toast.success(`User data changed successfully!`);
         },
@@ -146,14 +149,15 @@ const ManageUserDataPage = () => {
             src="https://placehold.co/600x400/EEE/31343C"
           />
           <Card.Body>
-            <Card.Title>{name}</Card.Title>
-            <Card.Text>
-              <p>Date of birth: {birthDate}</p>
-              <p>E-mail: {email}</p>
-              <p>Age: {age}</p>
-              <p>Username: {username}</p>
-            </Card.Text>
+            <Card.Title>{name}</Card.Title>{" "}
           </Card.Body>
+
+          <ListGroup variant="flush">
+            <ListGroup.Item>Date of birth: {birthDate}</ListGroup.Item>
+            <ListGroup.Item>E-mail: {email}</ListGroup.Item>
+            <ListGroup.Item>Age: {age}</ListGroup.Item>
+            <ListGroup.Item> Username: {username}</ListGroup.Item>
+          </ListGroup>
         </Card>
       </div>
     </>

@@ -8,7 +8,6 @@ import {
 } from "./api.ts";
 import { USER_QUERY_KEY, USERS_LIST_QUERY_KEY } from "./constants.ts";
 import useAuth from "../../hooks/useAuth.ts";
-import useUserContext from "../../hooks/useUserContext.ts";
 import { CreateUserType, UserType } from "../../types/userType.ts";
 
 export const useUsersList = () => {
