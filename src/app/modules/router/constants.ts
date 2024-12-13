@@ -3,4 +3,6 @@ export const PATH_NAMES = {
   conferencesPage: "/conferences",
   usersPage: "/users",
   settingsPage: "/settings",
+  createUserPage: "/create-user",
+  updateUserPage: "/update-user",
 };

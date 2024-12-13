@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+TZ+Guides&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply text-black;
+  body {
+    font-family: "Playwrite TZ Guides", cursive;
   }
 }
 

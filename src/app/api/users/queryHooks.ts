@@ -1,9 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { createUser, getUser, getUsersList, updateUser } from "./api.ts";
+import {
+  createUser,
+  deleteUser,
+  getUser,
+  getUsersList,
+  updateUser,
+} from "./api.ts";
 import { USER_QUERY_KEY, USERS_LIST_QUERY_KEY } from "./constants.ts";
 import useAuth from "../../hooks/useAuth.ts";
 import useUserContext from "../../hooks/useUserContext.ts";
-import { CreateUserType } from "../../types/userType.ts";
+import { CreateUserType, UserType } from "../../types/userType.ts";
 
 export const useUsersList = () => {
   const { data, isLoading } = useQuery(
@@ -35,7 +41,13 @@ export const useUser = () => {
 
 export const useUserCreate = () => {
   const { mutateAsync, isLoading } = useMutation(
-    ({ data }: { data: CreateUserType }) => createUser(data),
+    ({ data }: { data: CreateUserType; onSuccess: () => void }) =>
+      createUser(data),
+    {
+      onSuccess: async (_data, { onSuccess }) => {
+        onSuccess();
+      },
+    },
   );
 
   return {
@@ -47,15 +59,8 @@ export const useUserCreate = () => {
 export const useUserUpdate = () => {
   const queryClient = useQueryClient();
 
-  const { userData } = useUserContext();
-
   const { mutate, isLoading } = useMutation(
-    ({
-      backgroundClassName,
-    }: {
-      backgroundClassName: string;
-      onSuccess: () => void;
-    }) => updateUser(userData?.id ?? 0, backgroundClassName),
+    ({ data }: { data: UserType; onSuccess: () => void }) => updateUser(data),
     {
       onSuccess: async (_data, { onSuccess }) => {
         await queryClient.invalidateQueries([USER_QUERY_KEY]);
@@ -68,5 +73,25 @@ export const useUserUpdate = () => {
   return {
     mutateUserUpdate: mutate,
     isUserUpdating: isLoading,
+  };
+};
+
+export const useUserDelete = () => {
+  const queryClient = useQueryClient();
+
+  const { mutate, isLoading } = useMutation(
+    ({ id }: { id: number; onSuccess: () => void }) => deleteUser(id),
+    {
+      onSuccess: async (_data, { onSuccess }) => {
+        await queryClient.invalidateQueries([USERS_LIST_QUERY_KEY]);
+
+        onSuccess();
+      },
+    },
+  );
+
+  return {
+    mutateUserDelete: mutate,
+    isUserDeleting: isLoading,
   };
 };
