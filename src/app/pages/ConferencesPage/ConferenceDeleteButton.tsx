@@ -1,5 +1,4 @@
 import LoadingSpinner from "../../components/spinners/LoadingSpinner.tsx";
-import useUserContext from "../../hooks/useUserContext.ts";
 
 const ConferenceDeleteButton = ({
   onClick,

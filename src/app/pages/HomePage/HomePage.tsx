@@ -1,10 +1,7 @@
-import HomePageLayout from "./HomePageLayout.tsx";
-import useAuth from "../../hooks/useAuth.ts";
-import { useState } from "react";
-import LoginBlock from "./LoginBlock.tsx";
-import RegistrationBlock from "./RegistrationBlock.tsx";
-
 const HomePage = () => {
+  return null;
+
+  /*
   const { isAuthenticated } = useAuth();
 
   const [isLogging, setIsLogging] = useState(true);
@@ -44,6 +41,8 @@ const HomePage = () => {
       <strong>You are authorized</strong>
     </HomePageLayout>
   );
+
+   */
 };
 
 export default HomePage;

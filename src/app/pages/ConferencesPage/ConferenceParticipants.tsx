@@ -1,12 +1,7 @@
-import { ConferenceType } from "../../types/conferenceType.ts";
-
-const ConferenceParticipants = ({
-  conference,
-}: {
-  conference: ConferenceType;
-}) => {
+const ConferenceParticipants = () => {
   return null;
 
+  /*
   if (!conference.participants.length) {
     return null;
   }
@@ -21,6 +16,8 @@ const ConferenceParticipants = ({
       </ul>
     </div>
   );
+
+   */
 };
 
 export default ConferenceParticipants;

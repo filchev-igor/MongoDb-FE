@@ -1,10 +1,4 @@
-import {
-  fetchDelete,
-  fetchGet,
-  fetchPatch,
-  fetchPost,
-  fetchPut,
-} from "../../utils/api.ts";
+import { fetchDelete, fetchGet, fetchPost, fetchPut } from "../../utils/api.ts";
 import { CreateUserType, UserType } from "../../types/userType.ts";
 
 export const getUsersList = (): Promise<UserType[]> => {
